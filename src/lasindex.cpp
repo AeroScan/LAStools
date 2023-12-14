@@ -101,7 +101,7 @@ extern int lasindex_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 extern int lasindex_multi_core(int argc, char *argv[], LASreadOpener* lasreadopener, int cores, BOOL cpu64);
 #endif
 
-int main(int argc, char *argv[])
+int lasindex(int argc, char *argv[])
 {
   int i;
 #ifdef COMPILE_WITH_GUI

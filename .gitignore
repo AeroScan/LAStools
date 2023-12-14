@@ -13,3 +13,4 @@ bin/*.exe
 .vs
 *.pdb
 *.ilk
+build

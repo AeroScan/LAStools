@@ -64,6 +64,8 @@
 #include "lasvlrpayload.hpp"
 #include "lasindex.hpp"
 
+#include <lasinfo.hpp>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -213,7 +215,7 @@ extern int lasinfo_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 extern int lasinfo_multi_core(int argc, char *argv[], LASreadOpener* lasreadopener, LAShistogram* lashistogram, LASwriteOpener* laswriteopener, int cores, BOOL cpu64);
 #endif
 
-int main(int argc, char *argv[])
+int lasinfo(int argc, char *argv[])
 {
   int i;
 #ifdef COMPILE_WITH_GUI
@@ -313,7 +315,7 @@ int main(int argc, char *argv[])
   {
     for (i = 1; i < argc; i++)
     {
-      if (argv[i][0] == '–') argv[i][0] = '-';
+      if (argv[i][0] == 'ï¿½') argv[i][0] = '-';
     }
     if (!lashistogram.parse(argc, argv)) byebye(true);
     if (!lasreadopener.parse(argc, argv)) byebye(true);

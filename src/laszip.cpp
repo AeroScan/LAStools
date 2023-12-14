@@ -126,7 +126,7 @@ extern int laszip_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 extern int laszip_multi_core(int argc, char *argv[], GeoProjectionConverter* geoprojectionconverter, LASreadOpener* lasreadopener, LASwriteOpener* laswriteopener, int cores, BOOL cpu64);
 #endif
 
-int main(int argc, char *argv[])
+int laszip(int argc, char *argv[])
 {
   int i;
   BOOL dry = FALSE;
@@ -180,7 +180,7 @@ int main(int argc, char *argv[])
   {
     for (i = 1; i < argc; i++)
     {
-      if (argv[i][0] == '–') argv[i][0] = '-';
+      if (argv[i][0] == 'ï¿½') argv[i][0] = '-';
     }
     if (!geoprojectionconverter.parse(argc, argv)) byebye(true);
     if (!lasreadopener.parse(argc, argv)) byebye(true);

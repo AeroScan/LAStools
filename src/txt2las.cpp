@@ -59,6 +59,8 @@
 #include <windows.h>
 #endif
 
+#include <txt2las.hpp>
+
 #include "lasreader.hpp"
 #include "laswriter.hpp"
 #include "geoprojectionconverter.hpp"
@@ -147,7 +149,7 @@ extern int txt2las_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 extern int txt2las_multi_core(int argc, char *argv[], GeoProjectionConverter* geoprojectionconverter, LASreadOpener* lasreadopener, LASwriteOpener* laswriteopener, I32 cores, BOOL cpu64);
 #endif
 
-int main(int argc, char *argv[])
+int txt2las(int argc, char *argv[])
 {
 	int i;
 #ifdef COMPILE_WITH_GUI
@@ -197,7 +199,7 @@ int main(int argc, char *argv[])
 		// need to get those before lastransform->parse() routine gets them 
 		for (i = 1; i < argc; i++)
 		{
-			if (argv[i][0] == '–') argv[i][0] = '-';
+			if (argv[i][0] == 'ï¿½') argv[i][0] = '-';
 			if (strcmp(argv[i], "-scale_intensity") == 0)
 			{
 				if ((i + 1) >= argc)

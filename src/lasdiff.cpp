@@ -887,7 +887,7 @@ static int check_points(const CHAR* file_name1, LASreader* lasreader1, const CHA
 extern int lasdiff_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 #endif
 
-int main(int argc, char *argv[])
+int lasdiff(int argc, char *argv[])
 {
   int i;
 #ifdef COMPILE_WITH_GUI
@@ -921,7 +921,7 @@ int main(int argc, char *argv[])
   {
     for (i = 1; i < argc; i++)
     {
-      if (argv[i][0] == '–') argv[i][0] = '-';
+      if (argv[i][0] == 'ï¿½') argv[i][0] = '-';
     }
     if (!lasreadopener.parse(argc, argv)) byebye(true);
     if (!laswriteopener.parse(argc, argv)) byebye(true);

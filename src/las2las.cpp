@@ -283,7 +283,7 @@ extern int las2las_gui(int argc, char *argv[], LASreadOpener* lasreadopener);
 extern int las2las_multi_core(int argc, char *argv[], GeoProjectionConverter* geoprojectionconverter, LASreadOpener* lasreadopener, LASwriteOpener* laswriteopener, int cores, BOOL cpu64);
 #endif
 
-int main(int argc, char *argv[])
+int las2las(int argc, char *argv[])
 {
   int i;
 #ifdef COMPILE_WITH_GUI
@@ -366,7 +366,7 @@ int main(int argc, char *argv[])
   {
     for (i = 1; i < argc; i++)
     {
-      if (argv[i][0] == '–') argv[i][0] = '-';
+      if (argv[i][0] == 'ï¿½') argv[i][0] = '-';
       if (strcmp(argv[i],"-week_to_adjusted") == 0)
       {
         set_global_encoding_gps_bit = 1;
