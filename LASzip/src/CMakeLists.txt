@@ -5,6 +5,7 @@
 # Copyright (c) 2009 Mateusz Loskot <mateusz@loskot.net>
 #
 ###############################################################################
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/)
 set(LASZIP_SOURCES
     arithmeticdecoder.cpp
     arithmeticencoder.cpp

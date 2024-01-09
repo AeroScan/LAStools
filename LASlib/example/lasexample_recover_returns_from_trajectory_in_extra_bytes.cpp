@@ -41,9 +41,9 @@
 #include "lasreader.hpp"
 #include "laswriter.hpp"
 
-static void usage(bool wait=false)
-{
-}
+// static void usage(bool wait=false)
+// {
+// }
 
 static void byebye(bool wait=false)
 {

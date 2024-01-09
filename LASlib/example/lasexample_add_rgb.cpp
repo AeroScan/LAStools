@@ -39,20 +39,20 @@
 #include "lasreader.hpp"
 #include "laswriter.hpp"
 
-void usage(bool wait=false)
-{
-  fprintf(stderr,"usage:\n");
-  fprintf(stderr,"lasexample_with_rgb in.las out.las\n");
-  fprintf(stderr,"lasexample_with_rgb -i in.laz -o out_with_rgb.laz -verbose\n");
-  fprintf(stderr,"lasexample_with_rgb -ilas -olaz < in.las > out_with_rgb.laz\n");
-  fprintf(stderr,"lasexample_with_rgb -h\n");
-  if (wait)
-  {
-    fprintf(stderr,"<press ENTER>\n");
-    getc(stdin);
-  }
-  exit(1);
-}
+// void usage(bool wait=false)
+// {
+//   fprintf(stderr,"usage:\n");
+//   fprintf(stderr,"lasexample_with_rgb in.las out.las\n");
+//   fprintf(stderr,"lasexample_with_rgb -i in.laz -o out_with_rgb.laz -verbose\n");
+//   fprintf(stderr,"lasexample_with_rgb -ilas -olaz < in.las > out_with_rgb.laz\n");
+//   fprintf(stderr,"lasexample_with_rgb -h\n");
+//   if (wait)
+//   {
+//     fprintf(stderr,"<press ENTER>\n");
+//     getc(stdin);
+//   }
+//   exit(1);
+// }
 
 static void byebye(bool error=false, bool wait=false)
 {

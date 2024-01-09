@@ -109,28 +109,28 @@ static const char * LASpointClassification [32] = {
   "Reserved for ASPRS Definition"
 };
 
-void usage(bool error=false, bool wait=false)
-{
-  fprintf(stderr,"usage:\n");
-  fprintf(stderr,"lasinfo -i lidar.las\n");
-  fprintf(stderr,"lasinfo -i lidar.las -compute_density -o lidar_info.txt\n");
-  fprintf(stderr,"lasinfo -i *.las\n");
-  fprintf(stderr,"lasinfo -i *.las -single -otxt\n");
-  fprintf(stderr,"lasinfo -no_header -no_vlrs -i lidar.laz\n");
-  fprintf(stderr,"lasinfo -nv -nc -stdout -i lidar.las\n");
-  fprintf(stderr,"lasinfo -nv -nc -stdout -i *.laz -single | grep version\n");
-  fprintf(stderr,"lasinfo -i *.laz -subseq 100000 100100 -histo user_data 8\n");
-  fprintf(stderr,"lasinfo -i *.las -repair\n");
-  fprintf(stderr,"lasinfo -i *.laz -repair_bb -set_file_creation 8 2007\n");
-  fprintf(stderr,"lasinfo -i *.las -repair_counters -set_version 1.2\n");
-  fprintf(stderr,"lasinfo -i *.laz -set_system_identifier \"hello world!\" -set_generating_software \"this is a test (-:\"\n");
-  if (wait)
-  {
-    fprintf(stderr,"<press ENTER>\n");
-    getc(stdin);
-  }
-  exit(error);
-}
+// void usage(bool error=false, bool wait=false)
+// {
+//   fprintf(stderr,"usage:\n");
+//   fprintf(stderr,"lasinfo -i lidar.las\n");
+//   fprintf(stderr,"lasinfo -i lidar.las -compute_density -o lidar_info.txt\n");
+//   fprintf(stderr,"lasinfo -i *.las\n");
+//   fprintf(stderr,"lasinfo -i *.las -single -otxt\n");
+//   fprintf(stderr,"lasinfo -no_header -no_vlrs -i lidar.laz\n");
+//   fprintf(stderr,"lasinfo -nv -nc -stdout -i lidar.las\n");
+//   fprintf(stderr,"lasinfo -nv -nc -stdout -i *.laz -single | grep version\n");
+//   fprintf(stderr,"lasinfo -i *.laz -subseq 100000 100100 -histo user_data 8\n");
+//   fprintf(stderr,"lasinfo -i *.las -repair\n");
+//   fprintf(stderr,"lasinfo -i *.laz -repair_bb -set_file_creation 8 2007\n");
+//   fprintf(stderr,"lasinfo -i *.las -repair_counters -set_version 1.2\n");
+//   fprintf(stderr,"lasinfo -i *.laz -set_system_identifier \"hello world!\" -set_generating_software \"this is a test (-:\"\n");
+//   if (wait)
+//   {
+//     fprintf(stderr,"<press ENTER>\n");
+//     getc(stdin);
+//   }
+//   exit(error);
+// }
 
 static void byebye(bool error=false, bool wait=false)
 {
@@ -337,7 +337,7 @@ int lasinfo(int argc, char *argv[])
     else if (strcmp(argv[i],"-h") == 0)
     {
       fprintf(stderr, "LAStools (by info@rapidlasso.de) version %d\n", LAS_TOOLS_VERSION);
-      usage();
+      // usage();
     }
     else if (strcmp(argv[i],"-v") == 0)
     {
@@ -724,7 +724,7 @@ int lasinfo(int argc, char *argv[])
         if (sscanf(argv[i],"%d.%d",&major,&minor) != 2)
         {
           fprintf(stderr,"ERROR: cannot understand argument '%s' of '%s'\n", argv[i], argv[i-1]);
-          usage();
+          // usage();
         }
         set_version_major = (I8)major;
         set_version_minor = (I8)minor;
@@ -1687,7 +1687,7 @@ int lasinfo(int argc, char *argv[])
       if (lasreadopener.get_file_name() && (strcmp(lasreadopener.get_file_name(), laswriteopener.get_file_name()) == 0))
       {
         fprintf(stderr, "ERROR: input and output file name for '%s' are identical\n", lasreadopener.get_file_name());
-        usage(true);
+        // usage(true);
       }
       // open the text output file
       file_out = fopen(laswriteopener.get_file_name(), "w");
@@ -4899,7 +4899,7 @@ int lasinfo(int argc, char *argv[])
   if (set_offset) delete [] set_offset;
   if (set_scale) delete [] set_scale;
 
-  byebye(false, wait || (argc==1));
+  // byebye(false, wait || (argc==1));
 
   return 0;
 }

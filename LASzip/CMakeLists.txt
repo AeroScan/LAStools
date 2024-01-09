@@ -10,6 +10,7 @@ set(ROOT_DIR "${PROJECT_SOURCE_DIR}")
 # the version info is hard-coded
 set(LASZIP_API_VERSION_STRING "3.4.1" CACHE STRING "LASzip version" FORCE)
 
+
 include (CheckIncludeFileCXX)
 include(${ROOT_DIR}/cmake/common.cmake NO_POLICY_SCOPE)
 include(${ROOT_DIR}/cmake/cpack.cmake NO_POLICY_SCOPE)

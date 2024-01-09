@@ -28,9 +28,9 @@
   
 ===============================================================================
 */
-#include "lasignore.hpp"
+#include <lasignore.hpp>
 
-#include "laszip_decompress_selective_v3.hpp"
+#include <laszip_decompress_selective_v3.hpp>
 
 void LASignore::usage() const
 {

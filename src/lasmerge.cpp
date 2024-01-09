@@ -383,7 +383,7 @@ int lasmerge(int argc, char *argv[])
   lasreader->close();
   delete lasreader;
 
-  byebye(false, argc==1);
+  // byebye(false, argc==1);
 
   return 0;
 }

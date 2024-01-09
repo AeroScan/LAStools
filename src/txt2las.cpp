@@ -65,64 +65,64 @@
 #include "laswriter.hpp"
 #include "geoprojectionconverter.hpp"
 
-void usage(bool error = false, bool wait = false)
-{
-	fprintf(stderr, "Supported ASCII Inputs:\n");
-	fprintf(stderr, "  -i lidar.txt\n");
-	fprintf(stderr, "  -i lidar.txt.gz\n");
-	fprintf(stderr, "  -i lidar.zip\n");
-	fprintf(stderr, "  -i lidar.rar\n");
-	fprintf(stderr, "  -i lidar.7z\n");
-	fprintf(stderr, "  -i lidar.pts -ipts\n");
-	fprintf(stderr, "  -i lidar.ptx -iptx -iptx_transform\n");
-	fprintf(stderr, "  -stdin (pipe from stdin)\n");
-	fprintf(stderr, "usage:\n");
-	fprintf(stderr, "txt2las -parse tsxyz -i lidar.txt.gz\n");
-	fprintf(stderr, "txt2las -parse xyzairn -i lidar.zip -utm 17T -vertical_navd88 -olaz -set_classification 2 -quiet\n");
-	fprintf(stderr, "unzip -p lidar.zip | txt2las -parse xyz -stdin -o lidar.las -longlat -elevation_survey_feet\n");
-	fprintf(stderr, "txt2las -i lidar.zip -parse txyzar -scale_scan_angle 57.3 -o lidar.laz\n");
-	fprintf(stderr, "txt2las -skip 5 -parse xyz -i lidar.rar -set_file_creation 28 2011 -o lidar.las\n");
-	fprintf(stderr, "txt2las -parse xyzsst -verbose -set_scale 0.001 0.001 0.001 -i lidar.txt\n");
-	fprintf(stderr, "txt2las -parse xsysz -set_scale 0.1 0.1 0.01 -i lidar.txt.gz -sp83 OH_N -feet\n");
-	fprintf(stderr, "las2las -parse tsxyzRGB -i lidar.txt -set_version 1.2 -scale_intensity 65535 -o lidar.las\n");
-	fprintf(stderr, "txt2las -h\n");
-	fprintf(stderr, "---------------------------------------------\n");
-	fprintf(stderr, "The '-parse tsxyz' flag specifies how to interpret\n");
-	fprintf(stderr, "each line of the ASCII file. For example, 'tsxyzssa'\n");
-	fprintf(stderr, "means that the first number is the gpstime, the next\n");
-	fprintf(stderr, "number should be skipped, the next three numbers are\n");
-	fprintf(stderr, "the x, y, and z coordinate, the next two should be\n");
-	fprintf(stderr, "skipped, and the next number is the scan angle.\n");
-	fprintf(stderr, "The other supported entries are i - intensity,\n");
-	fprintf(stderr, "n - number of returns of given pulse, r - number\n");
-	fprintf(stderr, "of return, c - classification, u - user data, and\n");
-	fprintf(stderr, "p - point source ID, e - edge of flight line flag, and\n");
-	fprintf(stderr, "d - direction of scan flag, R - red channel of RGB\n");
-	fprintf(stderr, "color, G - green channel, B - blue channel, I - NIR channel,\n");
-	fprintf(stderr, "l - scanner channel, o - overlap flag, h - withheld\n");
-	fprintf(stderr, "flag, k - keypoint flag, g - synthetic flag, 0 - first\n");
-	fprintf(stderr, "additional attribute specified, 1 - second additional\n");
-	fprintf(stderr, "attribute specified, 2 - third ...\n");
-	fprintf(stderr, "---------------------------------------------\n");
-	fprintf(stderr, "Other parameters are\n");
-	fprintf(stderr, "'-set_point_type 6\n");
-	fprintf(stderr, "'-set_version 1.4\n");
-	fprintf(stderr, "'-set_scale 0.05 0.05 0.001'\n");
-	fprintf(stderr, "'-set_offset 500000 2000000 0'\n");
-	fprintf(stderr, "'-set_file_creation 67 2011'\n");
-	fprintf(stderr, "'-set_system_identifier \"Riegl 500,000 Hz\"'\n");
-	fprintf(stderr, "'-set_generating_software \"LAStools\"'\n");
-	fprintf(stderr, "'-set_global_encoding 1\n");
-	fprintf(stderr, "'-utm 14T'\n");
-	fprintf(stderr, "'-sp83 CA_I -feet -elevation_survey_feet'\n");
-	fprintf(stderr, "'-longlat -elevation_feet'\n");
-	if (wait)
-	{
-		fprintf(stderr, "<press ENTER>\n");
-		getc(stdin);
-	}
-	exit(error);
-}
+// void //usage(bool error = false, bool wait = false)
+// {
+// 	fprintf(stderr, "Supported ASCII Inputs:\n");
+// 	fprintf(stderr, "  -i lidar.txt\n");
+// 	fprintf(stderr, "  -i lidar.txt.gz\n");
+// 	fprintf(stderr, "  -i lidar.zip\n");
+// 	fprintf(stderr, "  -i lidar.rar\n");
+// 	fprintf(stderr, "  -i lidar.7z\n");
+// 	fprintf(stderr, "  -i lidar.pts -ipts\n");
+// 	fprintf(stderr, "  -i lidar.ptx -iptx -iptx_transform\n");
+// 	fprintf(stderr, "  -stdin (pipe from stdin)\n");
+// 	fprintf(stderr, "usage:\n");
+// 	fprintf(stderr, "txt2las -parse tsxyz -i lidar.txt.gz\n");
+// 	fprintf(stderr, "txt2las -parse xyzairn -i lidar.zip -utm 17T -vertical_navd88 -olaz -set_classification 2 -quiet\n");
+// 	fprintf(stderr, "unzip -p lidar.zip | txt2las -parse xyz -stdin -o lidar.las -longlat -elevation_survey_feet\n");
+// 	fprintf(stderr, "txt2las -i lidar.zip -parse txyzar -scale_scan_angle 57.3 -o lidar.laz\n");
+// 	fprintf(stderr, "txt2las -skip 5 -parse xyz -i lidar.rar -set_file_creation 28 2011 -o lidar.las\n");
+// 	fprintf(stderr, "txt2las -parse xyzsst -verbose -set_scale 0.001 0.001 0.001 -i lidar.txt\n");
+// 	fprintf(stderr, "txt2las -parse xsysz -set_scale 0.1 0.1 0.01 -i lidar.txt.gz -sp83 OH_N -feet\n");
+// 	fprintf(stderr, "las2las -parse tsxyzRGB -i lidar.txt -set_version 1.2 -scale_intensity 65535 -o lidar.las\n");
+// 	fprintf(stderr, "txt2las -h\n");
+// 	fprintf(stderr, "---------------------------------------------\n");
+// 	fprintf(stderr, "The '-parse tsxyz' flag specifies how to interpret\n");
+// 	fprintf(stderr, "each line of the ASCII file. For example, 'tsxyzssa'\n");
+// 	fprintf(stderr, "means that the first number is the gpstime, the next\n");
+// 	fprintf(stderr, "number should be skipped, the next three numbers are\n");
+// 	fprintf(stderr, "the x, y, and z coordinate, the next two should be\n");
+// 	fprintf(stderr, "skipped, and the next number is the scan angle.\n");
+// 	fprintf(stderr, "The other supported entries are i - intensity,\n");
+// 	fprintf(stderr, "n - number of returns of given pulse, r - number\n");
+// 	fprintf(stderr, "of return, c - classification, u - user data, and\n");
+// 	fprintf(stderr, "p - point source ID, e - edge of flight line flag, and\n");
+// 	fprintf(stderr, "d - direction of scan flag, R - red channel of RGB\n");
+// 	fprintf(stderr, "color, G - green channel, B - blue channel, I - NIR channel,\n");
+// 	fprintf(stderr, "l - scanner channel, o - overlap flag, h - withheld\n");
+// 	fprintf(stderr, "flag, k - keypoint flag, g - synthetic flag, 0 - first\n");
+// 	fprintf(stderr, "additional attribute specified, 1 - second additional\n");
+// 	fprintf(stderr, "attribute specified, 2 - third ...\n");
+// 	fprintf(stderr, "---------------------------------------------\n");
+// 	fprintf(stderr, "Other parameters are\n");
+// 	fprintf(stderr, "'-set_point_type 6\n");
+// 	fprintf(stderr, "'-set_version 1.4\n");
+// 	fprintf(stderr, "'-set_scale 0.05 0.05 0.001'\n");
+// 	fprintf(stderr, "'-set_offset 500000 2000000 0'\n");
+// 	fprintf(stderr, "'-set_file_creation 67 2011'\n");
+// 	fprintf(stderr, "'-set_system_identifier \"Riegl 500,000 Hz\"'\n");
+// 	fprintf(stderr, "'-set_generating_software \"LAStools\"'\n");
+// 	fprintf(stderr, "'-set_global_encoding 1\n");
+// 	fprintf(stderr, "'-utm 14T'\n");
+// 	fprintf(stderr, "'-sp83 CA_I -feet -elevation_survey_feet'\n");
+// 	fprintf(stderr, "'-longlat -elevation_feet'\n");
+// 	if (wait)
+// 	{
+// 		fprintf(stderr, "<press ENTER>\n");
+// 		getc(stdin);
+// 	}
+// 	exit(error);
+// }
 
 static void byebye(bool error = false, bool wait = false)
 {
@@ -205,7 +205,7 @@ int txt2las(int argc, char *argv[])
 				if ((i + 1) >= argc)
 				{
 					fprintf(stderr, "ERROR: '%s' needs 1 argument: factor\n", argv[i]);
-					usage(true);
+					// //usage(true);
 				}
 				lasreadopener.set_scale_intensity((F32)atof(argv[i + 1]));
 				*argv[i] = '\0'; *argv[i + 1] = '\0'; i += 1;
@@ -215,7 +215,7 @@ int txt2las(int argc, char *argv[])
 				if ((i + 1) >= argc)
 				{
 					fprintf(stderr, "ERROR: '%s' needs 1 argument: offset\n", argv[i]);
-					usage(true);
+					// //usage(true);
 				}
 				lasreadopener.set_translate_intensity((F32)atof(argv[i + 1]));
 				*argv[i] = '\0'; *argv[i + 1] = '\0'; i += 1;
@@ -225,7 +225,7 @@ int txt2las(int argc, char *argv[])
 				if ((i + 2) >= argc)
 				{
 					fprintf(stderr, "ERROR: '%s' needs 2 arguments: offset factor\n", argv[i]);
-					usage(true);
+					// //usage(true);
 				}
 				lasreadopener.set_translate_intensity((F32)atof(argv[i + 1]));
 				lasreadopener.set_scale_intensity((F32)atof(argv[i + 2]));
@@ -236,7 +236,7 @@ int txt2las(int argc, char *argv[])
 				if ((i + 1) >= argc)
 				{
 					fprintf(stderr, "ERROR: '%s' needs 1 argument: factor\n", argv[i]);
-					usage(true);
+					// //usage(true);
 				}
 				lasreadopener.set_scale_scan_angle((F32)atof(argv[i + 1]));
 				*argv[i] = '\0'; *argv[i + 1] = '\0'; i += 1;
@@ -256,7 +256,7 @@ int txt2las(int argc, char *argv[])
 		else if (strcmp(argv[i], "-h") == 0 || strcmp(argv[i], "-help") == 0)
 		{
 			fprintf(stderr, "LAStools (by info@rapidlasso.de) version %d\n", LAS_TOOLS_VERSION);
-			usage();
+			//usage();
 		}
 		else if (strcmp(argv[i], "-v") == 0 || strcmp(argv[i], "-verbose") == 0)
 		{
@@ -295,7 +295,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: number\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			argv[i][0] = '\0';
 			i++;
@@ -320,7 +320,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: parse_string\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			lasreadopener.set_parse_string(argv[i]);
@@ -330,19 +330,19 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: point_type\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			I32 point_type;
 			if (sscanf(argv[i], "%d", &point_type) != 1)
 			{
 				fprintf(stderr, "ERROR: cannot understand argument '%s' of '%s'\n", argv[i], argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 			if (point_type < 0 || point_type > 8 || point_type == 4 || point_type == 5)
 			{
 				fprintf(stderr, "ERROR: point type %d not supported\n", point_type);
-				usage(true);
+				//usage(true);
 			}
 			lasreadopener.set_point_type((U8)point_type);
 		}
@@ -351,7 +351,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: number_of_lines\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			lasreadopener.set_skip_lines(atoi(argv[i]));
@@ -361,26 +361,26 @@ int txt2las(int argc, char *argv[])
 			if ((i + 3) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			F64 scale_factor[3];
 			i++;
 			if (sscanf(argv[i], "%lf", &(scale_factor[0])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%lf", &(scale_factor[1])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 2]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%lf", &(scale_factor[2])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 3]);
-				usage(true);
+				//usage(true);
 			}
 			lasreadopener.set_scale_factor(scale_factor);
 		}
@@ -389,26 +389,26 @@ int txt2las(int argc, char *argv[])
 			if ((i + 3) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			F64 offset[3];
 			i++;
 			if (sscanf(argv[i], "%lf", &(offset[0])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%lf", &(offset[1])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 2]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%lf", &(offset[2])) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 3 arguments: x y z\n", argv[i - 3]);
-				usage(true);
+				//usage(true);
 			}
 			lasreadopener.set_offset(offset);
 		}
@@ -417,7 +417,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 3) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs at least 3 arguments: data_type name description\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			if (((i + 4) < argc) && (atof(argv[i + 4]) != 0.0))
 			{
@@ -467,19 +467,19 @@ int txt2las(int argc, char *argv[])
 			if ((i + 2) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 2 arguments: day year\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%d", &file_creation_day) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 2 arguments: day year\n", argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%d", &file_creation_year) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 2 arguments: day year\n", argv[i - 2]);
-				usage(true);
+				//usage(true);
 			}
 		}
 		else if (strcmp(argv[i], "-set_global_encoding") == 0)
@@ -487,13 +487,13 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: value\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%d", &set_global_encoding) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: value\n", argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 		}
 		else if (strcmp(argv[i], "-set_system_identifier") == 0)
@@ -501,7 +501,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: name\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			set_system_identifier = argv[i];
@@ -511,7 +511,7 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: name\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			set_generating_software = argv[i];
@@ -525,23 +525,23 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: major.minor\n", argv[i]);
-				usage(true);
+				//usage(true);
 			}
 			i++;
 			if (sscanf(argv[i], "%d.%d", &set_version_major, &set_version_minor) != 2)
 			{
 				fprintf(stderr, "ERROR: cannot understand argument '%s' of '%s'\n", argv[i], argv[i - 1]);
-				usage(true);
+				//usage(true);
 			}
 			if (set_version_major != 1)
 			{
 				fprintf(stderr, "ERROR: major version %d not supported\n", set_version_major);
-				usage(true);
+				//usage(true);
 			}
 			if ((set_version_minor < 0) || (set_version_minor > 4))
 			{
 				fprintf(stderr, "ERROR: minor version %d not supported\n", set_version_minor);
-				usage(true);
+				//usage(true);
 			}
 		}
 		else if (strcmp(argv[i], "-progress") == 0)
@@ -549,17 +549,17 @@ int txt2las(int argc, char *argv[])
 			if ((i + 1) >= argc)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: every\n", argv[i]);
-				byebye(true);
+				//byebye(true);
 			}
 			if (sscanf(argv[i + 1], "%u", &progress) != 1)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: every but '%s' is no valid number\n", argv[i], argv[i + 1]);
-				byebye(true);
+				//byebye(true);
 			}
 			if (progress == 0)
 			{
 				fprintf(stderr, "ERROR: '%s' needs 1 argument: every but '%u' is no valid number\n", argv[i], progress);
-				byebye(true);
+				//byebye(true);
 			}
 			i++;
 		}
@@ -571,7 +571,7 @@ int txt2las(int argc, char *argv[])
 		else
 		{
 			fprintf(stderr, "ERROR: cannot understand argument '%s'\n", argv[i]);
-			usage(true);
+			//usage(true);
 		}
 	}
 
@@ -609,7 +609,7 @@ int txt2las(int argc, char *argv[])
 	if (!lasreadopener.active())
 	{
 		fprintf(stderr, "ERROR: no input specified\n");
-		byebye(true, argc == 1);
+		// //byebye(true, argc == 1);
 	}
 
 	// for piped output some checks are needed
@@ -621,7 +621,7 @@ int txt2las(int argc, char *argv[])
 		if (lasreadopener.is_piped())
 		{
 			fprintf(stderr, "ERROR: input and output cannot both be piped\n");
-			byebye(true, argc == 1);
+			// //byebye(true, argc == 1);
 		}
 
 		// make sure there is only one input file
@@ -629,7 +629,7 @@ int txt2las(int argc, char *argv[])
 		if ((lasreadopener.get_file_name_number() > 1) && (!lasreadopener.is_merged()))
 		{
 			fprintf(stderr, "ERROR: multiple (unmerged) input files cannot produce piped output\n");
-			byebye(true, argc == 1);
+			// //byebye(true, argc == 1);
 		}
 
 		lasreadopener.set_populate_header(TRUE);
@@ -663,7 +663,7 @@ int txt2las(int argc, char *argv[])
 		if (lasreader == 0)
 		{
 			fprintf(stderr, "ERROR: could not open lasreader\n");
-			byebye(true, argc == 1);
+			// //byebye(true, argc == 1);
 		}
 
 		if (verbose)
@@ -851,7 +851,7 @@ int txt2las(int argc, char *argv[])
 		if (laswriter == 0)
 		{
 			fprintf(stderr, "ERROR: could not open laswriter\n");
-			byebye(true, argc == 1);
+			// //byebye(true, argc == 1);
 		}
 
 		// loop over points
@@ -911,7 +911,7 @@ int txt2las(int argc, char *argv[])
 
 	if (!quiet && (lasreadopener.get_file_name_number() > 1)) fprintf(stderr, "done with %u files. total time %g sec.\n", lasreadopener.get_file_name_number(), taketime() - full_start_time);
 
-	byebye(false, argc == 1);
+	// //byebye(talse, argc == 1);
 
 	return 0;
 }

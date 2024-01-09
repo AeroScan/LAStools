@@ -23,16 +23,22 @@ set(STANDALONE_TARGETS
 set(ALL_TARGETS ${GEOPROJECTION_TARGETS} ${STANDALONE_TARGETS})
 
 foreach(TARGET ${GEOPROJECTION_TARGETS})
-	add_library(${TARGET} ${TARGET}.cpp ${TARGET}lib.cpp geoprojectionconverter.cpp)
+	message(WARNING "**************************************")
+	message(WARNING "${CMAKE_CURRENT_SOURCE_DIR}/../include")
+	message(WARNING "**************************************")
+	add_library(${TARGET} ${TARGET}.cpp ${TARGET}lib.cpp  geoprojectionconverter.cpp)
+	target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
 endforeach(TARGET)
+
 
 foreach(TARGET ${STANDALONE_TARGETS})
 	add_library(${TARGET} ${TARGET}.cpp ${TARGET}lib.cpp)
+	target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 endforeach(TARGET)
 
 foreach(TARGET ${ALL_TARGETS})
 	target_link_libraries(${TARGET} LASlib)
-	target_include_directories(${TARGET} PUBLIC ${CMAKE_SOURCE_DIR}/include)
+	target_include_directories(${TARGET} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 	set_target_properties(${TARGET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/../bin64)
 	set_target_properties(${TARGET} PROPERTIES OUTPUT_NAME ${TARGET}64)
 	install(TARGETS ${TARGET} RUNTIME DESTINATION bin)

@@ -2,6 +2,8 @@ if (!MSVC)
 	add_compile_options(-Wno-deprecated -Wno-write-strings -Wno-unused-result -std=c++11)
 endif()
 add_definitions(-DNDEBUG -DUNORDERED -DHAVE_UNORDERED_MAP)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../inc)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/)
 
 set(LAS_SRC
 	lasreader.cpp
@@ -66,7 +68,7 @@ file(GLOB_RECURSE LAS_INCLUDES
 	${CMAKE_SOURCE_DIR}/LASlib/inc/*.hpp
 )
 
-add_library(LASlib ${LAS_SRC} ${LAZ_SRC_FULL})
+add_library(LASlib ${LAS_SRC} ${LAZ_SRC_FULL} ${LAS_INCLUDES})
 set_property(TARGET LASlib PROPERTY POSITION_INDEPENDENT_CODE ON)
 
 if (BUILD_SHARED_LIBS)
@@ -74,8 +76,8 @@ if (BUILD_SHARED_LIBS)
 endif()
 
 target_include_directories(LASlib PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/LASlib/inc>
-  $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/LASzip/src>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../LASlib/inc
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../../LASzip/src>
   $<INSTALL_INTERFACE:include/LASlib>
 )
 set_target_properties(LASlib PROPERTIES

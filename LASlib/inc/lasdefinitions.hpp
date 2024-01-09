@@ -61,6 +61,7 @@
 #include "laszip.hpp"
 #include "laspoint.hpp"
 
+
 #define LAS_TOOLS_FORMAT_DEFAULT 0
 #define LAS_TOOLS_FORMAT_LAS     1
 #define LAS_TOOLS_FORMAT_LAZ     2
